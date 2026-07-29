@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rock Paper Scissors</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #fff;
+  }
+  .container {
+    background: rgba(0,0,0,0.35);
+    padding: 30px 40px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  h1 { margin-top: 0; letter-spacing: 1px; }
+
+  .scoreboard {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+  }
+  .score-box { text-align: center; }
+  .score-box .label { font-size: 0.85em; opacity: 0.8; }
+  .score-box .value { font-size: 1.8em; font-weight: bold; }
+
+  .choices {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  .choices button {
+    font-size: 2em;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .choices button:hover {
+    transform: scale(1.12);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  }
+  .choices button:active { transform: scale(0.95); }
+
+  .battle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 25px 0 15px;
+    font-size: 3em;
+  }
+  .vs { font-size: 0.4em; opacity: 0.7; }
+
+  .result {
+    min-height: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .win { color: #4ade80; }
+  .lose { color: #f87171; }
+  .tie { color: #fbbf24; }
+
+  .reset {
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  .reset:hover { background: rgba(255,255,255,0.15); }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🪨📄✂️ Rock Paper Scissors</h1>
+
+  <div class="scoreboard">
+    <div class="score-box">
+      <div class="label">You</div>
+      <div class="value" id="playerScore">0</div>
+    </div>
+    <div class="score-box">
+      <div class="label">Ties</div>
+      <div class="value" id="tieScore">0</div>
+    </div>
+    <div class="score-box">
+      <div class="label">Computer</div>
+      <div class="value" id="computerScore">0</div>
+    </div>
+  </div>
+
+  <div class="battle">
+    <div id="playerEmoji">❓</div>
+    <div class="vs">VS</div>
+    <div id="computerEmoji">❓</div>
+  </div>
+
+  <div class="result" id="resultText">Make your move!</div>
+
+  <div class="choices">
+    <button onclick="play('rock')" title="Rock">🪨</button>
+    <button onclick="play('paper')" title="Paper">📄</button>
+    <button onclick="play('scissors')" title="Scissors">✂️</button>
+  </div>
+
+  <button class="reset" onclick="resetScores()">Reset Scores</button>
+</div>
+
+<script>
+  const emojis = { rock: '🪨', paper: '📄', scissors: '✂️' };
+  let playerScore = 0, computerScore = 0, tieScore = 0;
+
+  function play(playerChoice) {
+    const options = ['rock', 'paper', 'scissors'];
+    const computerChoice = options[Math.floor(Math.random() * 3)];
+
+    document.getElementById('playerEmoji').textContent = emojis[playerChoice];
+    document.getElementById('computerEmoji').textContent = emojis[computerChoice];
+
+    const resultText = document.getElementById('resultText');
+    const outcome = getOutcome(playerChoice, computerChoice);
+
+    if (outcome === 'win') {
+      playerScore++;
+      resultText.textContent = `You win! ${cap(playerChoice)} beats ${cap(computerChoice)}`;
+      resultText.className = 'result win';
+    } else if (outcome === 'lose') {
+      computerScore++;
+      resultText.textContent = `You lose! ${cap(computerChoice)} beats ${cap(playerChoice)}`;
+      resultText.className = 'result lose';
+    } else {
+      tieScore++;
+      resultText.textContent = `It's a tie! Both chose ${cap(playerChoice)}`;
+      resultText.className = 'result tie';
+    }
+
+    updateScoreboard();
+  }
+
+  function getOutcome(player, computer) {
+    if (player === computer) return 'tie';
+    const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
+    return beats[player] === computer ? 'win' : 'lose';
+  }
+
+  function cap(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
+  function updateScoreboard() {
+    document.getElementById('playerScore').textContent = playerScore;
+    document.getElementById('computerScore').textContent = computerScore;
+    document.getElementById('tieScore').textContent = tieScore;
+  }
+
+  function resetScores() {
+    playerScore = 0;
+    computerScore = 0;
+    tieScore = 0;
+    updateScoreboard();
+    document.getElementById('resultText').textContent = 'Make your move!';
+    document.getElementById('resultText').className = 'result';
+    document.getElementById('playerEmoji').textContent = '❓';
+    document.getElementById('computerEmoji').textContent = '❓';
+  }
+</script>
+
+</body>
+</html>

@@ -42,7 +42,7 @@ Rock-Paper-Scissors/
 
 ## 📸 Screenshot
 
-![alt text](image.png
+![alt text](image.png)
 
 ## 📄 License
 

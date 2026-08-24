@@ -42,8 +42,8 @@ Rock-Paper-Scissors/
 
 ## 📸 Screenshot
 
-_Add a screenshot of the game here._
+![alt text](image.png)
 
 ## 📄 License
 
-This project is open-source and available for learning and personal use.
+This project is open-source and available for learning and personal use

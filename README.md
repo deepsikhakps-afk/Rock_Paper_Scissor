@@ -46,4 +46,4 @@ Rock-Paper-Scissors/
 
 ## 📄 License
 
-This project is open-source and available for learning and personal use
+This project is open-source and available for learning and personal use.

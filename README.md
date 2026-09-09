@@ -37,7 +37,7 @@ Rock-Paper-Scissors/
 
 - Rock beats Scissors
 - Scissors beats Paper
-- Paper beats Rock
+- Paper beat
 - If both players choose the same option, the round is a tie.
 
 ## 📸 Screenshot

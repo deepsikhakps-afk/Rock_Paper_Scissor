@@ -35,7 +35,11 @@ Rock-Paper-Scissors/
 
 ## 🎯 Game Rules
 
-- R
+- Rock beats Scissors
+- Scissors beats Paper
+- Paper beats Rock
+- If both players choose the same option, the round is a tie.
+
 ## 📸 Screenshot
 
 ![alt text](image.png)

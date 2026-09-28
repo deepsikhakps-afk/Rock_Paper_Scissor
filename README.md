@@ -29,10 +29,7 @@ Rock-Paper-Scissors/
 ## ▶️ How to Run
 
 1. Download or clone this repository.
-2. Open `rock-paper-scissors.html` in your web browser.
-3. Choose Rock, Paper, or Scissors.
-4. Play against the computer and enjoy!
-
+2. Open 
 ## 🎯 Game Rules
 
 - Rock beats Scissors
